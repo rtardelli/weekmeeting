@@ -1,5 +1,27 @@
 <ion-view view-title="Meeting">
-  <ion-content>
-    <h1>Metting</h1>
-  </ion-content>
+	<ion-pane>
+		<div <body ng-controller="MeetingCtrl">
+			<ion-header-bar class="bar-positive">
+	      		<h1 class="title">Lista de reuniões</h1>
+	    	</ion-header-bar>
+		  	<ion-content>
+			    <ion-list>
+			        <div ng-repeat="group in groups">
+			          <ion-item class="item-stable"
+			                    ng-click="toggleGroup(group)"
+			                    ng-class="{active: isGroupShown(group)}">
+			           		<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+			           		&nbsp;
+			           		{{group.name}}
+			          </ion-item>
+			          <ion-item class="item-accordion"
+			                    ng-repeat="item in group.items"
+			                    ng-show="isGroupShown(group)">
+			            	{{item}}
+			          </ion-item>
+			        </div>
+		      	</ion-list>
+			</ion-content>
+	  	</div>
+	</ion-pane>
 </ion-view>
