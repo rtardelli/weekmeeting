@@ -58,6 +58,58 @@ angular.module('starter.controllers', [])
   console.log('MeetingsCtrl', $scope);
 })
 
-.controller('MeetingCtrl', function($scope, $stateParams) {
-  console.log('MeetingCtrl', $scope);
-});
+.controller('MeetingCtrl', function($scope) {
+  $scope.groups = [];
+  // Inserindo os grupos
+  $scope.groups[0] = {
+    name: 'Done',
+    items: []
+  };
+  $scope.groups[1] = {
+    name: 'Doing',
+    items: []
+  };
+  $scope.groups[2] = {
+    name: 'To Do',
+    items: []
+  };
+  $scope.groups[3] = {
+    name: 'Observation',
+    items: []
+  };
+
+  // Inserindo tarefas
+  // tarefas - Done
+  $scope.groups[0].items.push('done 1');
+    
+  // tarefas - Doing
+  $scope.groups[1].items.push('doing 1');
+  $scope.groups[1].items.push('doing 2');
+
+  // tarefas - To Do
+  $scope.groups[2].items.push('to do 1');
+  $scope.groups[2].items.push('to do 2');
+  $scope.groups[2].items.push('to do 3');
+
+  // tarefas - Observação
+  $scope.groups[3].items.push('obs 1');
+  $scope.groups[3].items.push('obs 2');
+  $scope.groups[3].items.push('obs 3');
+  $scope.groups[3].items.push('obs 4');
+
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+})
