@@ -7,18 +7,21 @@
 		  	<ion-content>
 			    <ion-list>
 			        <div ng-repeat="group in groups">
-			          <ion-item class="item-stable"
+			          	<ion-item class="item-stable"
 			                    ng-click="toggleGroup(group)"
 			                    ng-class="{active: isGroupShown(group)}">
 			           		<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
 			           		&nbsp;
 			           		{{group.name}}
-			          </ion-item>
-			          <ion-item class="item-accordion"
+			          	</ion-item>
+			          	<ion-item class="item-accordion"
 			                    ng-repeat="item in group.items"
 			                    ng-show="isGroupShown(group)">
 			            	{{item}}
-			          </ion-item>
+			          	</ion-item>
+			          	<button class="button button-block button-positive" ng-show="isGroupShown(group)">
+  							Adicionar
+						</button>
 			        </div>
 		      	</ion-list>
 			</ion-content>
