@@ -42,6 +42,17 @@ angular.module('starter.services', [])
 	    },
 	    getAll: function(){
 			return meetings;
+		},
+		getMeeting: function(id){
+			for (i = 0; i < meetings.length; i++) {
+			    if(meetings[i].id == $stateParams.id){
+			      return meetings[i];
+			    }
+			}
+			return {};
+		},
+		addMeeting: function(meeting){
+			meetings.push(meeting);
 		}
 	}
 }]);

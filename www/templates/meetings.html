@@ -1,15 +1,19 @@
 <ion-view view-title="Meetings">
+<div class="bar bar-header">
+  <button class="button button-icon icon ion-navicon"></button>
+  <div class="h1 title">Header Buttons</div>
+</div>
   <ion-content>
     <ion-list>
     	<ion-item ng-hide="meetings.length">
-    		Não existem reuniões
+    		Não existem reuniões cadastradas
 		</ion-item>
 	    <ion-item ng-repeat="meeting in meetings" href="#/app/meetings/{{meeting.id}}">
 	    	{{meeting.title}}
 	    </ion-item>
     </ion-list>
     <button class="button button-block button-positive">
-		Adicionar
-	</button>
+  		Adicionar
+  	</button>
   </ion-content>
 </ion-view>

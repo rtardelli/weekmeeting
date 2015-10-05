@@ -4,26 +4,24 @@ angular.module('starter.controllers', ['starter.services'])
   
 })
 
-.controller('MeetingsCtrl', function($scope, $localstorage) {
-  
+.controller('MeetingsCtrl', function($scope, $localstorage) { 
   $scope.meetings = $localstorage.getAll();
-
-  $scope.addMeeting = function(){
-    console.log('Ir para tela de novo meeting');
-  };
 })
 
-.controller('MeetingCtrl', function($scope, $stateParams, $localstorage) {
-
-  $scope.title = 'Reunião ' + $stateParams.meetingId;
+.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage) {
+  $scope.title = 'Reunião ' + $stateParams.id;
 
   var allMeetings = $localstorage.getAll();
 
   for (i = 0; i < allMeetings.length; i++) {
-    if(allMeetings[i].id == $stateParams.meetingId){
-      $scope.groups = allMeetings[i].groups;
+    if(allMeetings[i].id == $stateParams.id){
+      $scope.meeting = allMeetings[i];
       break;
     }
+  };
+
+  $scope.editAction = function(id) {
+    $state.go('app.edit',{ "id": id});
   };
 
   /*
