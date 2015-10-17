@@ -1,27 +1,37 @@
 angular.module('starter.controllers', ['starter.services'])
+// Constants
+.constant('newMeeting',-1)
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   
 })
 
-.controller('MeetingsCtrl', function($scope, $localstorage) { 
+.controller('MeetingsCtrl', function($scope, $localstorage, $state, newMeeting) { 
   $scope.meetings = $localstorage.getAll();
+
+  // Funcao de adicionar uma nova reuniao
+  $scope.addAction = function() {
+    $state.go('app.edit', {"id": newMeeting});
+  };
 })
 
-.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage) {
-  $scope.title = 'Reunião ' + $stateParams.id;
+.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting) {
+  var meeting = $localstorage.getMeeting($stateParams.id);
 
-  var allMeetings = $localstorage.getAll();
-
-  for (i = 0; i < allMeetings.length; i++) {
-    if(allMeetings[i].id == $stateParams.id){
-      $scope.meeting = allMeetings[i];
-      break;
+  $scope.meeting = meeting;
+  if($stateParams.id == newMeeting){ // Nova reunião
+    $scope.title = 'Nova reunião';
+  } else {
+    if(meeting.id === undefined){ // Reunião inexistente
+      $scope.title = 'Reunião inexistente';
+    }else{
+      $scope.title = 'Reunião ' + $stateParams.id;
     }
-  };
-
+  }
+  
+  // Ação do botão editar. Tela de visualização
   $scope.editAction = function(id) {
-    $state.go('app.edit',{ "id": id});
+    $state.go('app.edit', {"id": id});
   };
 
   /*

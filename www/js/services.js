@@ -45,11 +45,16 @@ angular.module('starter.services', [])
 		},
 		getMeeting: function(id){
 			for (i = 0; i < meetings.length; i++) {
-			    if(meetings[i].id == $stateParams.id){
+			    if(meetings[i].id == id){
 			      return meetings[i];
 			    }
 			}
-			return {};
+			return {
+				groups: [{name:'Done', items:[]}, 
+                		{name:'Doing', items:[]}, 
+                		{name:'To Do', items:[]}, 
+                		{name:'Observation', items:[]}]
+			};			
 		},
 		addMeeting: function(meeting){
 			meetings.push(meeting);

@@ -1,8 +1,9 @@
 <ion-view view-title="Meetings">
-<div class="bar bar-header">
-  <button class="button button-icon icon ion-navicon"></button>
-  <div class="h1 title">Header Buttons</div>
-</div>
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-clear button-positive" ng-click="addAction()">
+      Add
+    </button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
     	<ion-item ng-hide="meetings.length">
@@ -12,8 +13,5 @@
 	    	{{meeting.title}}
 	    </ion-item>
     </ion-list>
-    <button class="button button-block button-positive">
-  		Adicionar
-  	</button>
   </ion-content>
 </ion-view>
