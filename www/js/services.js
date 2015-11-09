@@ -1,6 +1,7 @@
 angular.module('starter.services', [])
 .factory('$localstorage', ['$window', function($window) {
-	meetings = [
+	var lastID = 4;
+	var meetings = [
 	    { id: 1, title: 'Meeting 1', location: 'Rio de Janeiro', 
 	      groups: [{name:'Done', items:['done1.1', 'done1.2']}, 
 	                {name:'Doing', items:['doing1.1', 'doing1.2']}, 
@@ -57,7 +58,9 @@ angular.module('starter.services', [])
 			};			
 		},
 		addMeeting: function(meeting){
+			meeting.id = ++lastID;
 			meetings.push(meeting);
+			console.log(meetings);
 		}
 	}
 }]);

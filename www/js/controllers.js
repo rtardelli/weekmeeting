@@ -1,6 +1,7 @@
 angular.module('starter.controllers', ['starter.services'])
 // Constants
 .constant('newMeeting',-1)
+.constant('lastItem',1)
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   
@@ -15,7 +16,7 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
-.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting) {
+.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, lastItem) {
   var meeting = $localstorage.getMeeting($stateParams.id);
 
   $scope.meeting = meeting;
@@ -34,6 +35,11 @@ angular.module('starter.controllers', ['starter.services'])
     $state.go('app.edit', {"id": id});
   };
 
+  // Ação do botão editar. Tela de visualização
+  $scope.saveAction = function(id) {
+    console.log($scope.meeting);
+  };
+
   /*
    * if given group is the selected group, deselect it
    * else, select the given group
@@ -48,5 +54,9 @@ angular.module('starter.controllers', ['starter.services'])
 
   $scope.isGroupShown = function(group) {
     return $scope.shownGroup === group;
+  };
+
+  $scope.addValue = function(group){
+    group.items.push("Value"+(lastItem++));
   };
 })

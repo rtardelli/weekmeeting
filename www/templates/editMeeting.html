@@ -1,30 +1,28 @@
 <ion-view view-title={{title}}>
+	<ion-nav-buttons side="right">
+		<button menu-toggle="right" class="button button-clear button-positive" ng-click="saveAction()">Save</button>
+	</ion-nav-buttons>
 	<ion-pane>
 		<div ng-controller="MeetingCtrl">
-			<ion-header-bar class="bar-positive">
-	      		<h1 class="title">Teste</h1>
-	    	</ion-header-bar>
-		  	<ion-content>
-			    <ion-list>
-			        <div ng-repeat="group in meeting.groups">
-			          	<ion-item class="item-stable"
-			                    ng-click="toggleGroup(group)"
-			                    ng-class="{active: isGroupShown(group)}">
-			           		<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
-			           		&nbsp;
-			           		{{group.name}}
-			          	</ion-item>
-			          	<ion-item class="item-accordion"
-			                    ng-repeat="item in group.items"
-			                    ng-show="isGroupShown(group)">
-			            	{{item}}
-			          	</ion-item>
-			          	<button class="button button-block button-positive" ng-show="isGroupShown(group)">
-  							Adicionar
+			<ion-content>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">{{meeting.title}}</span>
+					<input type="text" placeholder="{{meeting.title || 'Nome da reunião'}}">
+				</label>
+				<ion-list>
+					<div ng-repeat="group in meeting.groups">
+						<ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+							<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{group.name}}
+						</ion-item>
+						<ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
+							{{item}}
+						</ion-item>
+						<button class="button button-block button-positive" ng-click="addValue(group)" ng-show="isGroupShown(group)">
+							Adicionar
 						</button>
-			        </div>
-		      	</ion-list>
+					</div>
+				</ion-list>
 			</ion-content>
-	  	</div>
+		</div>
 	</ion-pane>
 </ion-view>
