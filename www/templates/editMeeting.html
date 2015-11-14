@@ -9,13 +9,15 @@
 					<span class="input-label">{{meeting.title}}</span>
 					<input type="text" placeholder="{{meeting.title || 'Nome da reunião'}}">
 				</label>
-				<ion-list>
+				<ion-list can-swipe="true">
 					<div ng-repeat="group in meeting.groups">
 						<ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
 							<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{group.name}}
 						</ion-item>
 						<ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
 							{{item}}
+							<ion-option-button class="button-positive" ng-click="editAction()">Edit</ion-option-button>
+    						<ion-option-button class="button-assertive" ng-click="deleteAction(group.items, $index)">Delete</ion-option-button>
 						</ion-item>
 						<button class="button button-block button-positive" ng-click="addValue(group)" ng-show="isGroupShown(group)">
 							Adicionar

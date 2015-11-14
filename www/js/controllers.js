@@ -31,7 +31,7 @@ angular.module('starter.controllers', ['starter.services'])
   }
   
   // Ação do botão editar. Tela de visualização
-  $scope.editAction = function(id) {
+  $scope.viewEditAction = function(id) {
     $state.go('app.edit', {"id": id});
   };
 
@@ -59,4 +59,12 @@ angular.module('starter.controllers', ['starter.services'])
   $scope.addValue = function(group){
     group.items.push("Value"+(lastItem++));
   };
+  
+  $scope.editAction = function(){
+    console.log('edit action');
+  }
+  
+  $scope.deleteAction = function(items, index){
+    items.splice(index, 1);
+  }
 })
