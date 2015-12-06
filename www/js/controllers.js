@@ -16,7 +16,7 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
-.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, lastItem) {
+.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, lastItem, $ionicModal, $ionicListDelegate) {
   var meeting = $localstorage.getMeeting($stateParams.id);
 
   $scope.meeting = meeting;
@@ -67,4 +67,70 @@ angular.module('starter.controllers', ['starter.services'])
   $scope.deleteAction = function(items, index){
     items.splice(index, 1);
   }
+  
+  // Load the add / edit dialog from the given template URL
+  $ionicModal.fromTemplateUrl('templates/add-edit-dialog.html', function(modal) {
+    $scope.addDialog = modal;
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up'
+  });
+  
+  $scope.showAddChangeDialog = function(action) {
+    $scope.action = action;
+    $scope.addDialog.show();
+  };
+  
+  $scope.leaveAddChangeDialog = function() {
+    // Remove dialog 
+    $scope.addDialog.remove();
+    // Reload modal template to have cleared form
+    $ionicModal.fromTemplateUrl('templates/add-edit-dialog.html', function(modal) {
+      $scope.addDialog = modal;
+    }, {
+      scope: $scope,
+      animation: 'slide-in-up'
+    });
+  };
+  
+  // Used to cache the empty form for Edit Dialog
+  $scope.saveEmpty = function(form) {
+    $scope.form = angular.copy(form);
+  }
+  
+  $scope.addItem = function(form) {
+    //TODO: Implementar
+    //var newItem = {};
+    // Add values from form to object
+    console.log("retorno da adicao: "+form.item.$modelValue);
+    // Save new list in scope and factory
+    //$scope.list.push(newItem);
+    //ListFactory.setList($scope.list);
+    // Close dialog
+    $scope.leaveAddChangeDialog();
+  };
+  
+  $scope.showEditItem = function(group, item) {
+    console.log(group)
+    // Remember edit item to change it later
+    $scope.tmpEditGroup = group;
+    $scope.tmpEditItem = item;
+
+    // Setting form model-value
+    $scope.form.itemtest.$setViewValue(item);
+
+    // Open dialog
+    $scope.showAddChangeDialog('edit');
+    
+    // Close de options buttons
+    $ionicListDelegate.closeOptionButtons();
+  };
+
+  $scope.editItem = function(form) {
+    var editIndex = $scope.tmpEditGroup.items.indexOf($scope.tmpEditItem);
+    $scope.tmpEditGroup.items[editIndex] = form.itemtest.$modelValue;
+
+    // Close dialog
+    $scope.leaveAddChangeDialog();
+  };
 })
