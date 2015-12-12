@@ -55,10 +55,6 @@ angular.module('starter.controllers', ['starter.services'])
   $scope.isGroupShown = function(group) {
     return $scope.shownGroup === group;
   };
-
-  $scope.addValue = function(group){
-    group.items.push("Value"+(lastItem++));
-  };
   
   $scope.editAction = function(){
     console.log('edit action');
@@ -98,22 +94,29 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.form = angular.copy(form);
   }
   
+  $scope.showAddItem = function(group) {
+    // Remember edit item to change it later
+    $scope.tmpGroup = group;
+    
+    // Open dialog
+    $scope.showAddChangeDialog('add');
+    
+    // Close de options buttons
+    $ionicListDelegate.closeOptionButtons();
+  }
+  
   $scope.addItem = function(form) {
-    //TODO: Implementar
-    //var newItem = {};
-    // Add values from form to object
-    console.log("retorno da adicao: "+form.item.$modelValue);
-    // Save new list in scope and factory
-    //$scope.list.push(newItem);
-    //ListFactory.setList($scope.list);
+    console.log("retorno da adicao: "+form.itemtest.$modelValue);
+
+    $scope.tmpGroup.items.push(form.itemtest.$modelValue);
+
     // Close dialog
     $scope.leaveAddChangeDialog();
   };
   
   $scope.showEditItem = function(group, item) {
-    console.log(group)
     // Remember edit item to change it later
-    $scope.tmpEditGroup = group;
+    $scope.tmpGroup = group;
     $scope.tmpEditItem = item;
 
     // Setting form model-value
