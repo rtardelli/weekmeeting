@@ -114,7 +114,7 @@ angular.module('starter.controllers', ['starter.services'])
   
   $scope.showEditItem = function(group, item) {
     // Remember edit item to change it later
-    $scope.tmpGroup = group;
+    $scope.tmpEditGroup = group;
     $scope.tmpEditItem = item;
 
     // Setting form model-value
