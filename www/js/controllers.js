@@ -106,8 +106,6 @@ angular.module('starter.controllers', ['starter.services'])
   }
   
   $scope.addItem = function(form) {
-    console.log("retorno da adicao: "+form.itemtest.$modelValue);
-
     $scope.tmpGroup.items.push(form.itemtest.$modelValue);
 
     // Close dialog
@@ -121,6 +119,7 @@ angular.module('starter.controllers', ['starter.services'])
 
     // Setting form model-value
     $scope.form.itemtest.$setViewValue(item);
+    $scope.form.itemtest.$render();
 
     // Open dialog
     $scope.showAddChangeDialog('edit');

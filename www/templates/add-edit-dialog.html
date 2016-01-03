@@ -7,12 +7,12 @@
 	<form name="form" ng-model="form">
 	  <div class="list list-inset">
 		<label class="item item-input">
-			<input type="text" placeholder="{{itemtest}}" name="itemtest" ng-model="itemtest" required />
+			<input type="text" name="itemtest" ng-model="itemtest" required /><br/>
 		</label>
-		<ion-button ng-show="action == 'add'" ng-init="saveEmpty(form)" class="button button-block button-positive" ng-click="addItem(form)">
+		<ion-button ng-show="action == 'add'" class="button button-block button-positive" ng-click="addItem(form)">
 				Add
 		</ion-button>
-		<ion-button ng-show="action == 'edit'" class="button button-block button-positive" ng-click="editItem(form)">
+		<ion-button ng-show="action == 'edit'" ng-init="saveEmpty(form)" class="button button-block button-positive" ng-click="editItem(form)">
 				Edit
 		</ion-button>
 	  </div>
