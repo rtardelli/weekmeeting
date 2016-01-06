@@ -1,7 +1,6 @@
 angular.module('starter.controllers', ['starter.services'])
 // Constants
 .constant('newMeeting',-1)
-.constant('lastItem',1)
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   
@@ -16,28 +15,25 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
-.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, lastItem, $ionicModal, $ionicListDelegate) {
-  var meeting = $localstorage.getMeeting($stateParams.id);
+.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, $ionicModal, $ionicListDelegate) {
+  $scope.meeting = $localstorage.getMeeting($stateParams.id);
 
-  $scope.meeting = meeting;
-  if($stateParams.id == newMeeting){ // Nova reunião
-    $scope.title = 'Nova reunião';
-  } else {
-    if(meeting.id === undefined){ // Reunião inexistente
-      $scope.title = 'Reunião inexistente';
-    }else{
-      $scope.title = 'Reunião ' + $stateParams.id;
-    }
-  }
-  
   // Ação do botão editar. Tela de visualização
   $scope.viewEditAction = function(id) {
     $state.go('app.edit', {"id": id});
   };
 
-  // Ação do botão editar. Tela de visualização
-  $scope.saveAction = function(id) {
-    console.log($scope.meeting);
+  // Ação do botão salvar(Persistir reunião)
+  $scope.saveAction = function() {
+    if($scope.meeting.id == newMeeting){
+      //add action
+      console.log("Adicionar: ");
+      console.log($scope.meeting);
+    }else{
+      //edit action
+      console.log("Editar: ");
+      console.log($scope.meeting);
+    }
   };
 
   /*
@@ -55,10 +51,6 @@ angular.module('starter.controllers', ['starter.services'])
   $scope.isGroupShown = function(group) {
     return $scope.shownGroup === group;
   };
-  
-  $scope.editAction = function(){
-    console.log('edit action');
-  }
   
   $scope.deleteAction = function(items, index){
     items.splice(index, 1);

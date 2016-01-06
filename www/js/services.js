@@ -51,6 +51,7 @@ angular.module('starter.services', [])
 			    }
 			}
 			return {
+				id: -1, title: 'Empty',
 				groups: [{name:'Done', items:[]}, 
                 		{name:'Doing', items:[]}, 
                 		{name:'To Do', items:[]}, 
