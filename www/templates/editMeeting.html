@@ -1,30 +1,28 @@
-<ion-view view-title={{meeting.title}}>
+<ion-view ng-controller="MeetingCtrl" view-title="{{meeting.title}}">
 	<ion-nav-buttons side="right">
 		<button menu-toggle="right" class="button button-clear button-positive" ng-click="saveAction()">Save</button>
 	</ion-nav-buttons>
 	<ion-pane>
-		<div ng-controller="MeetingCtrl">
-			<ion-content>
-				<label class="item item-input item-stacked-label">
-					<span class="input-label">Nome da reunião</span>
-					<input type="text" ng-model="meeting.title"> 
-				</label>
-				<ion-list can-swipe="true">
-					<div ng-repeat="group in meeting.groups">
-						<ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
-							<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{group.name}}
-						</ion-item>
-						<ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
-							{{item}}
-							<ion-option-button class="button-positive" ng-click="showEditItem(group, item)">Edit</ion-option-button>
-    						<ion-option-button class="button-assertive" ng-click="deleteAction(group.items, $index)">Delete</ion-option-button>
-						</ion-item>
-						<button class="button button-block button-positive" ng-click="showAddItem(group)" ng-show="isGroupShown(group)">
-							Adicionar
-						</button>
-					</div>
-				</ion-list>
-			</ion-content>
-		</div>
+		<ion-content>
+			<label class="item item-input item-stacked-label">
+				<span class="input-label">Nome da reunião</span>
+				<input type="text" ng-model="meeting.title"/>
+			</label>
+			<ion-list can-swipe="true">
+				<div ng-repeat="group in meeting.groups">
+					<ion-item class="item-stable" ng-click="toggleGroup(group)" ng-class="{active: isGroupShown(group)}">
+						<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{group.name}}
+					</ion-item>
+					<ion-item class="item-accordion" ng-repeat="item in group.items" ng-show="isGroupShown(group)">
+						{{item}}
+						<ion-option-button class="button-positive" ng-click="showEditItem(group, item)">Edit</ion-option-button>
+						<ion-option-button class="button-assertive" ng-click="deleteAction(group.items, $index)">Delete</ion-option-button>
+					</ion-item>
+					<button class="button button-block button-positive" ng-click="showAddItem(group)" ng-show="isGroupShown(group)">
+						Adicionar
+					</button>
+				</div>
+			</ion-list>
+		</ion-content>
 	</ion-pane>
 </ion-view>
