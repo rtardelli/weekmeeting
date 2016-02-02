@@ -27,40 +27,70 @@ angular.module('starter.services', [])
 	                {name:'Observation', items:['obs4.1', 'obs4.2']}]
 	    }
 	  ];
+	  
+	var buildMeeting = function(id, title, groups){
+		if(id === undefined){
+			id = -1;
+		}
+		if(title === undefined){
+			title = 'Empty';
+		}
+		if(groups === undefined){
+			groups = [{name:'Done', items:[]}, {name:'Doing', items:[]}, 
+                	{name:'To Do', items:[]}, {name:'Observation', items:[]}];
+		}
+		
+		return {id: id, title: title, groups: groups};
+	};
 
   	return {
-	    set: function(key, value) {
-	      $window.localStorage[key] = value;
-	    },
-	    get: function(key, defaultValue) {
-	      return $window.localStorage[key] || defaultValue;
-	    },
-	    setObject: function(key, value) {
-	      $window.localStorage[key] = JSON.stringify(value);
-	    },
-	    getObject: function(key) {
-	      return JSON.parse($window.localStorage[key] || '{}');
-	    },
+	    //set: function(key, value) {
+	    //  $window.localStorage[key] = value;
+	    //},
+	    //get: function(key, defaultValue) {
+	    //  return $window.localStorage[key] || defaultValue;
+	    //},
+	    //setObject: function(key, value) {
+	    //  $window.localStorage[key] = JSON.stringify(value);
+	    //},
+	    //getObject: function(key) {
+	    //  return JSON.parse($window.localStorage[key] || '{}');
+	    //},
 	    getAll: function(){
 			return meetings;
 		},
-		getMeeting: function(id) {
+		get: function(id) {
 			for (i = 0; i < meetings.length; i++) {
 			    if(meetings[i].id == id){
 			      return meetings[i];
 			    }
 			}
-			return {
-				id: -1, title: 'Empty',
-				groups: [{name:'Done', items:[]}, 
-                		{name:'Doing', items:[]}, 
-                		{name:'To Do', items:[]}, 
-                		{name:'Observation', items:[]}]
-			};			
+			return buildMeeting();			
 		},
-		addMeeting: function(meeting){
+		add: function(meeting){
+			console.log('Adicionando a reuniao: ' + meeting);
 			meeting.id = ++lastID;
 			meetings.push(meeting);
+			console.log(meetings);
+		},
+		update: function(meeting){
+			console.log('Atualizando a reuniao: ' + meeting);
+			for(var i = 0; i < meetings.length; i++){
+				if(meeting.id === meetings[i].id){
+					meetings.splice(i, 1, meeting);
+					break;
+				}
+			}
+			console.log(meetings);
+		},
+		remove: function(id){
+			console.log('Removendo a reuniao: ' + id);
+			for(var i = 0; i < meetings.length; i++){
+				if(id === meetings[i].id){
+					meetings.splice(i, 1);
+					break;
+				}
+			}
 			console.log(meetings);
 		}
 	}

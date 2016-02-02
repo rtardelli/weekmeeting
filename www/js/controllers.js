@@ -16,7 +16,7 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, $ionicModal, $ionicListDelegate) {
-  $scope.meeting = $localstorage.getMeeting($stateParams.id);
+  $scope.meeting = $localstorage.get($stateParams.id);
 
   // Ação do botão editar. Tela de visualização
   $scope.viewEditAction = function(id) {
@@ -29,10 +29,14 @@ angular.module('starter.controllers', ['starter.services'])
       //add action
       console.log("Adicionar: ");
       console.log($scope.meeting);
+      $localstorage.add($scope.meeting);
+      $state.go('app.meetings');
     }else{
       //edit action
       console.log("Editar: ");
       console.log($scope.meeting);
+      $localstorage.update($scope.meeting);
+      $state.go('app.meetings');
     }
   };
 
