@@ -15,25 +15,37 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
-.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, $ionicModal, $ionicListDelegate) {
+.controller('MeetingCtrl', function($scope, $state, $stateParams, $localstorage, newMeeting, $ionicModal, $ionicPopup, $ionicListDelegate) {
   $scope.meeting = $localstorage.get($stateParams.id);
 
   // Ação do botão editar. Tela de visualização
-  $scope.viewEditAction = function(id) {
+  $scope.editOneMeeting = function(id) {
     $state.go('app.edit', {"id": id});
   };
 
+  $scope.deleteOneMeeting = function(id) {
+    console.log('Deletando a reunião ' + id);
+     var confirmPopup = $ionicPopup.confirm({
+     title: 'Remover',
+     template: 'Tem certeza de que quer remover essa reunião?'
+   });
+
+   confirmPopup.then(function(res) {
+     if(res) {
+       $localstorage.remove(id);
+     }
+   });
+  };
+  
   // Ação do botão salvar(Persistir reunião)
   $scope.saveAction = function() {
     if($scope.meeting.id == newMeeting){
       //add action
-      console.log("Adicionar: ");
       console.log($scope.meeting);
       $localstorage.add($scope.meeting);
       $state.go('app.meetings');
     }else{
       //edit action
-      console.log("Editar: ");
       console.log($scope.meeting);
       $localstorage.update($scope.meeting);
       $state.go('app.meetings');

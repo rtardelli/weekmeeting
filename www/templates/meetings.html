@@ -1,16 +1,17 @@
-<ion-view view-title="Meetings">
+<ion-view ng-controller="MeetingCtrl" view-title="Meetings">
   <ion-nav-buttons side="right">
     <button menu-toggle="right" class="button button-clear button-positive" ng-click="addAction()">
       Add
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <ion-list>
-    	<ion-item ng-hide="meetings.length">
-    		Não existem reuniões cadastradas
-		</ion-item>
+    <ion-list can-swipe="true">
+    	<ion-item ng-hide="meetings.length">Não existem reuniões cadastradas</ion-item>
+      
 	    <ion-item ng-repeat="meeting in meetings" href="#/app/meetings/{{meeting.id}}">
 	    	{{meeting.title}}
+        <ion-option-button class="button-positive" ng-click="editOneMeeting(meeting.id)">Edit</ion-option-button>
+				<ion-option-button class="button-assertive" ng-click="deleteOneMeeting(meeting.id)">Delete</ion-option-button>
 	    </ion-item>
     </ion-list>
   </ion-content>
