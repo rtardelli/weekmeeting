@@ -28,6 +28,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     templateUrl: "templates/menu.html",
     controller: 'AppCtrl'
   })
+  
+  $stateProvider
+  .state('app-right', {
+    url: "/app",
+    abstract: true,
+    templateUrl: "templates/right-menu.html",
+    controller: 'MeetingsCtrl'
+  })
 
   .state('app.search', {
     url: "/search",
@@ -48,7 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.meeting', {
+  .state('app-right.meeting', {
     url: "/meetings/:id",
     views: {
       'menuContent': {
