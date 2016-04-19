@@ -17,6 +17,9 @@
 			           		<i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
 			           		&nbsp;
 			           		{{group.name}}
+							<div data-ng-if="group.items">
+								<span class="badge">{{group.items.length}}</span>
+							</div>
 			          	</ion-item>
 			          	<ion-item class="item-accordion"
 			                    ng-repeat="item in group.items"

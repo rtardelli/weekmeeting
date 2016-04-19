@@ -80,8 +80,8 @@ angular.module('starter.controllers', ['starter.services'])
     animation: 'slide-in-up'
   });
   
-  $scope.showAddChangeDialog = function(action) {
-    $scope.action = action;
+  $scope.showAddChangeDialog = function(dialog) {
+    $scope.dialog = dialog;
     $scope.addDialog.show();
   };
   
@@ -107,7 +107,8 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.tmpGroup = group;
     
     // Open dialog
-    $scope.showAddChangeDialog('add');
+    var dialog = {title: 'Adding '+group.name, action: 'add'};
+    $scope.showAddChangeDialog(dialog);
     
     // Close de options buttons
     $ionicListDelegate.closeOptionButtons();
@@ -130,7 +131,8 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.form.itemtest.$render();
 
     // Open dialog
-    $scope.showAddChangeDialog('edit');
+    var dialog = {title: 'Editing '+group.name, action: 'edit'};
+    $scope.showAddChangeDialog(dialog);
     
     // Close de options buttons
     $ionicListDelegate.closeOptionButtons();

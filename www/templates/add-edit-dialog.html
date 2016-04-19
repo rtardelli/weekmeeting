@@ -1,7 +1,7 @@
 <ion-modal-view>
   <ion-header-bar class="bar bar-header bar-dark">
     <ion-button class="button icon-left ion-chevron-left button-clear" ng-click="leaveAddChangeDialog()">Cancel</ion-button>
-	<h1 class="title">Add item</h1> <!--TODO: Titulo editavel-->
+	<div ng-if="dialog"><h1 class="title">{{dialog.title}}</h1></div>
   </ion-header-bar>
   <ion-content class="padding">
 	<form name="form" ng-model="form">
@@ -9,10 +9,10 @@
 		<label class="item item-input">
 			<input type="text" name="itemtest" ng-model="itemtest" required /><br/>
 		</label>
-		<ion-button ng-show="action == 'add'" class="button button-block button-positive" ng-click="addItem(form)">
+		<ion-button ng-show="dialog.action == 'add'" class="button button-block button-positive" ng-click="addItem(form)">
 				Add
 		</ion-button>
-		<ion-button ng-show="action == 'edit'" ng-init="saveEmpty(form)" class="button button-block button-positive" ng-click="editItem(form)">
+		<ion-button ng-show="dialog.action == 'edit'" ng-init="saveEmpty(form)" class="button button-block button-positive" ng-click="editItem(form)">
 				Edit
 		</ion-button>
 	  </div>
